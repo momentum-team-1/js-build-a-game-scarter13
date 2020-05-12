@@ -5,5 +5,5 @@ console.log (canvas);
 const ctx = canvas.getContext("2d");
 
 ctx.fillStyle="blue";
-ctx.fillRect(10, 10, 100, 100)
+ctx.fillRect(10, 10, 20, 20)
 
