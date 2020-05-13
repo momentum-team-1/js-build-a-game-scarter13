@@ -6,6 +6,7 @@ class Game {
         let screen = canvas.getContext('2d')
         let gameSize = { x: canvas.width, y: canvas.height}
         this.player = new Player (gameSize)
+
         let animate = () => {
             this.update()
             this.drawPlayer(screen, gameSize)
@@ -17,6 +18,9 @@ class Game {
     drawPlayer (screen, gameSize) {
         screen.clearRect(0, 0, gameSize.x, gameSize.y)
         console.log ("drawing")
+        screen.beginPath()
+        screen.rect(150,150,150,150)
+        screen.stroke()
         screen.fillStyle= "blue"
         let startingXPosition = this.player.center.x - this.player.size.x / 2
         let startingYPosition = this.player.center.y - this.player.size.y / 2
@@ -33,7 +37,7 @@ class Game {
 
 class Player {
     constructor (gameSize) {
-        this.size = {x: 30, y: 30}
+        this.size = {x: 50, y: 50}
         this.center = { x: gameSize.x / 2, y: gameSize.y / 2}
         this.keyboarder = Keyboarder
     }
