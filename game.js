@@ -6,7 +6,7 @@ class Game {
         let screen = canvas.getContext('2d')
         let gameSize = { x: canvas.width, y: canvas.height}
         this.player = new Player (gameSize)
-
+        this.coin = new Coin (gameSize)
         let animate = () => {
             this.update()
             this.drawPlayer(screen, gameSize)
@@ -14,11 +14,10 @@ class Game {
         }
         animate ()
     }
-    console
+
 
     drawPlayer (screen, gameSize) {
         screen.clearRect(0, 0, gameSize.x, gameSize.y)
-        console.log ("drawing")
         screen.beginPath()
         screen.rect(145,145,160,160)
         screen.stroke()
@@ -28,6 +27,13 @@ class Game {
         let playerWidth = this.player.size.x
         let playerHeight = this.player.size.y
         screen.fillRect (startingXPosition, startingYPosition, playerWidth, playerHeight)
+    }
+
+    drawCoin(screen, gamesize) {
+        console.log ("drawing coin")
+        screen.fillStyle= "yellow"
+        let xPosition
+
     }
     
     update () {
@@ -62,6 +68,19 @@ class Player {
         else if (this.center.y < 175) {this.center.y = 175}
         else if (this.center.y > 275) {this.center.y = 275}
     }
+
+}
+
+class Coin {
+    constructor (gameSize) {
+        this.size = {x: 40, y: 50}
+        this.center = { x: gameSize.x / 2, y: gameSize.y / 2}
+        let ranX = (Math.floor(Math.random() * 3))
+        let ranY = (Math.floor(Math.random() * 3))
+        console.log (ranX)
+        console.log (ranY)
+    }
+   
 
 }
 
