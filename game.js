@@ -14,12 +14,13 @@ class Game {
         }
         animate ()
     }
+    console
 
     drawPlayer (screen, gameSize) {
         screen.clearRect(0, 0, gameSize.x, gameSize.y)
         console.log ("drawing")
         screen.beginPath()
-        screen.rect(150,150,150,150)
+        screen.rect(145,145,160,160)
         screen.stroke()
         screen.fillStyle= "blue"
         let startingXPosition = this.player.center.x - this.player.size.x / 2
@@ -31,6 +32,7 @@ class Game {
     
     update () {
         this.player.update()
+        this.player.limit()
     }
 
 }
@@ -44,16 +46,21 @@ class Player {
 
     update () { 
         if (this.keyboarder.isDown(this.keyboarder.KEYS.RIGHT)) {
-            this.center.x += 2
+            this.center.x += 5
         } else if (this.keyboarder.isDown(this.keyboarder.KEYS.LEFT)) {
-            console.log("left")
-            this.center.x -= 2
-        } 
-        else if (this.keyboarder.isDown(this.keyboarder.KEYS.UP)){
-            this.center.y -= 2
+            this.center.x -= 5
+        } else if (this.keyboarder.isDown(this.keyboarder.KEYS.UP)){
+            this.center.y -= 5
         } else if (this.keyboarder.isDown(this.keyboarder.KEYS.DOWN)){
-            this.center.y += 2
+            this.center.y += 5
         } 
+    }
+
+    limit() {
+        if (this.center.x > 275) {this.center.x = 275}
+        else if (this.center.x < 175) {this.center.x = 175}
+        else if (this.center.y < 175) {this.center.y = 175}
+        else if (this.center.y > 275) {this.center.y = 275}
     }
 
 }
