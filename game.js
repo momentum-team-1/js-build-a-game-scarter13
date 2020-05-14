@@ -70,8 +70,8 @@ class Game {
         if (this.tick > 150){
             console.log("new Enemy")
             this.tick = 0
-            let fred = new Enemy
-            this.bodies.push(fred)
+            // let fred = new Enemy
+            // this.bodies.push(fred)
         }
 
         
@@ -95,6 +95,7 @@ class Player {
         this.size = {x: 40, y: 40}
         this.center = { x: gameSize.x / 2, y: gameSize.y / 2}
         this.keyboarder = Keyboarder
+        console.log ("player on")
     }
 
     update () { 
@@ -124,7 +125,7 @@ class Coin {
         this.size = {x: 30, y: 30}
         this.center = {x: 275, y: 175}
         let ranX = (Math.floor(Math.random() * 3))
-        console.log(ranX)
+        // console.log(ranX)
             if (ranX === 0) {this.center.x = 175}
             else if (ranX === 1) {this.center.x = 225}
             else if (ranX === 2) {this.center.x = 275}
@@ -134,74 +135,84 @@ class Coin {
             else if (ranY === 1) {this.center.y = 225}
             else if (ranY === 2) {this.center.y = 275}
     }
+
 }
 
 class Enemy {
     constructor (){
+        // console.log ("enemy on")
     this.size = {x: 30, y: 30}
+        // let side = 0
+        // let point = 0
     let side = (Math.floor(Math.random() * 4))
     let point = (Math.floor(Math.random() * 3))
-    console.log(side)
-    console.log(point)
+    // console.log(side)
+    // console.log(point)
      if (side === 0) {
+         console.log("hang in there!")
         if (point === 0){
             this.center = {x: 175, y:0}
-            this.direction = "down"
+            this.direction = 1
+            console.log ("direction is 1")
         } else if (point === 1){
             this.center = {x: 225, y:0}
-            this.direction = "down"
+            this.direction = 1
         } else if (point === 2){
             this.center = {x: 275, y:0}
-            this.direction = "down"
+            this.direction = 1
         }
      } else if (side === 1){
         if (point === 0){
             this.center = {x: 450, y:175}
-            this.direction = "left"
+            this.direction = 2
         } else if (point === 1){
             this.center = {x: 450, y:225}
-            this.direction = "left"
+            this.direction = 2
         } else if (point === 2){
             this.center = {x: 450, y:275}
-            this.direction = "left"
+            this.direction = 2
         }
      } else if (side === 2){
         if (point === 0){
             this.center = {x: 175, y:450}
-            this.direction = "up"
+            this.direction = 3
         } else if (point === 1){
             this.center = {x: 225, y:450}
-            this.direction = "up"
+            this.direction = 3
         } else if (point === 2){
             this.center = {x: 275, y:450}
-            this.direction = "up"
+            this.direction = 3
         } 
      }  else if (side === 3){
         if (point === 0){
             this.center = {x: 0, y:175}
-            this.direction = "right"
+            this.direction = 4
         } else if (point === 1){
             this.center = {x: 0, y:225}
-            this.direction = "right"
+            this.direction = 4
         } else if (point === 2){
             this.center = {x: 0, y:275}
-            this.direction = "right"
+            this.direction = 4
         }
+        console.log (this.direction)
      }
     // this.center = {x: 175, y: 0}
+    // let fred = this.enemy
+    // bodies.push(fred)
     
 
     }
 
     update() {
-        for (body of bodies) {
-            if (this.body.direction == "down"){
+        // for (body of bodies) {
+            if (this.direction === 1){
                 this.center.y += 3
-            } else if (this.body.direction == "left"){
+                // console.log ("YES!")
+            } else if (this.direction === 2){
                 this.center.x -= 3
-            } else if (this.body.direction == "up"){
+            } else if (this.direction === 3){
                 this.center.y -= 3
-            } else if (this.body.direction) == "right"){
+            } else if (this.direction === 4){
                 this.center.x += 3
             }
         }
@@ -209,7 +220,7 @@ class Enemy {
         // this.center.y += 3   
         // if this.direction = whatever, then axis and speed
  
-        }
+        
 }
 
 
