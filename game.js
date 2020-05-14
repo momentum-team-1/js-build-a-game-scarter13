@@ -70,8 +70,8 @@ class Game {
         if (this.tick > 150){
             console.log("new Enemy")
             this.tick = 0
-            // this.enemy = new Enemy
-            // this.bodies.push.this.enemy
+            let fred = new Enemy
+            this.bodies.push(fred)
         }
 
         
@@ -139,23 +139,76 @@ class Coin {
 class Enemy {
     constructor (){
     this.size = {x: 30, y: 30}
-    // let side = (Math.floor(Math.random() * 4))
-
-    // let point = (Math.floor(Math.random() * 3))
-
-    //  if (side === 0) {
-    //      if (point === 0){
-    //          this.center = {x: 175, y:0}
-    //          let axis = "x"
-    //      }
-    //  }
-    this.center = {x: 175, y: 0}
+    let side = (Math.floor(Math.random() * 4))
+    let point = (Math.floor(Math.random() * 3))
+    console.log(side)
+    console.log(point)
+     if (side === 0) {
+        if (point === 0){
+            this.center = {x: 175, y:0}
+            this.direction = "down"
+        } else if (point === 1){
+            this.center = {x: 225, y:0}
+            this.direction = "down"
+        } else if (point === 2){
+            this.center = {x: 275, y:0}
+            this.direction = "down"
+        }
+     } else if (side === 1){
+        if (point === 0){
+            this.center = {x: 450, y:175}
+            this.direction = "left"
+        } else if (point === 1){
+            this.center = {x: 450, y:225}
+            this.direction = "left"
+        } else if (point === 2){
+            this.center = {x: 450, y:275}
+            this.direction = "left"
+        }
+     } else if (side === 2){
+        if (point === 0){
+            this.center = {x: 175, y:450}
+            this.direction = "up"
+        } else if (point === 1){
+            this.center = {x: 225, y:450}
+            this.direction = "up"
+        } else if (point === 2){
+            this.center = {x: 275, y:450}
+            this.direction = "up"
+        } 
+     }  else if (side === 3){
+        if (point === 0){
+            this.center = {x: 0, y:175}
+            this.direction = "right"
+        } else if (point === 1){
+            this.center = {x: 0, y:225}
+            this.direction = "right"
+        } else if (point === 2){
+            this.center = {x: 0, y:275}
+            this.direction = "right"
+        }
+     }
+    // this.center = {x: 175, y: 0}
     
 
     }
 
     update() {
-        this.center.y += 3      
+        for (body of bodies) {
+            if (this.body.direction == "down"){
+                this.center.y += 3
+            } else if (this.body.direction == "left"){
+                this.center.x -= 3
+            } else if (this.body.direction == "up"){
+                this.center.y -= 3
+            } else if (this.body.direction) == "right"){
+                this.center.x += 3
+            }
+        }
+
+        // this.center.y += 3   
+        // if this.direction = whatever, then axis and speed
+ 
         }
 }
 
