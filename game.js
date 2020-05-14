@@ -5,9 +5,12 @@ class Game {
         let canvas = document.querySelector('#gameboard')
         let screen = canvas.getContext('2d')
         let gameSize = { x: canvas.width, y: canvas.height}
+        this.bodies = []
         this.player = new Player (gameSize)
         this.coin = new Coin (gameSize)
         this.enemy = new Enemy
+        this.bodies.push(this.enemy)
+        this.tick = 0
         let animate = () => {
             this.update()
             this.drawPlayer(screen, gameSize)
@@ -42,7 +45,7 @@ class Game {
         screen.fillRect (coinXPosition, coinYPosition, coinWidth, coinHeight)
     }
     drawEnemy(screen) {
-        console.log ("drawing enemy")
+        // console.log ("drawing enemy")
         screen.fillStyle="black"
         let enemyXPosition = this.enemy.center.x - this.enemy.size.x / 2
         let enemyYPosition = this.enemy.center.y - this.enemy.size.y / 2
@@ -62,12 +65,30 @@ class Game {
             }  else {
                 this.coin = new Coin 
             }
+        console.log (this.tick)
+        this.tick += 1
+        if (this.tick > 150){
+            console.log("new Enemy")
+            this.tick = 0
+            // this.enemy = new Enemy
+            // this.bodies.push.this.enemy
         }
 
+        
+
+
+    }
 
     
 
 }
+
+
+
+
+
+    
+
 
 class Player {
     constructor (gameSize) {
@@ -95,9 +116,6 @@ class Player {
         else if (this.center.y > 275) {this.center.y = 275}
     }
 
-    getCoin() {
-        if (this.player.center.x + this.player.size.x/2 > this.coin.center.x - this.coin.size.x) {console.log ("Hit, left side")}
-    }
 
 }
 
@@ -121,13 +139,28 @@ class Coin {
 class Enemy {
     constructor (){
     this.size = {x: 30, y: 30}
+    // let side = (Math.floor(Math.random() * 4))
+
+    // let point = (Math.floor(Math.random() * 3))
+
+    //  if (side === 0) {
+    //      if (point === 0){
+    //          this.center = {x: 175, y:0}
+    //          let axis = "x"
+    //      }
+    //  }
     this.center = {x: 175, y: 0}
+    
+
     }
 
     update() {
-        this.center.y += 1
-    }
+        this.center.y += 3      
+        }
 }
+
+
+
 
 new Game ()
 
