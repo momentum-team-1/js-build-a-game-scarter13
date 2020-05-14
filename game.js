@@ -10,6 +10,7 @@ class Game {
         let animate = () => {
             this.update()
             this.drawPlayer(screen, gameSize)
+            this.drawCoin(screen)
             requestAnimationFrame(animate)
         }
         animate ()
@@ -29,36 +30,53 @@ class Game {
         screen.fillRect (startingXPosition, startingYPosition, playerWidth, playerHeight)
     }
 
-    drawCoin(screen, gamesize) {
-        console.log ("drawing coin")
-        screen.fillStyle= "yellow"
-        let xPosition
+    drawCoin(screen) {
+        // console.log ("drawing coin")
+        screen.fillStyle= "gold"
+        let coinXPosition = this.coin.center.x - this.coin.size.x / 2
+        let coinYPosition = this.coin.center.y - this.coin.size.y / 2
+        let coinWidth = this.coin.size.x
+        let coinHeight = this.coin.size.y
+        screen.fillRect (coinXPosition, coinYPosition, coinWidth, coinHeight)
+
+
 
     }
     
     update () {
         this.player.update()
         this.player.limit()
-    }
+        if (this.player.center.x + this.player.size.x/2 < this.coin.center.x - this.coin.size.x/2 ||
+            this.player.center.x - this.player.size.x/2 > this.coin.center.x + this.coin.size.x/2 ||
+            this.player.center.y + this.player.size.x/2 < this.coin.center.y - this.coin.size.x/2 ||
+            this.player.center.y - this.player.size.x/2 > this.coin.center.y + this.coin.size.x/2){
+                console.log("no collision")
+            }  else {
+                this.coin = new Coin 
+            }
+        }
+
+
+    
 
 }
 
 class Player {
     constructor (gameSize) {
-        this.size = {x: 50, y: 50}
+        this.size = {x: 40, y: 40}
         this.center = { x: gameSize.x / 2, y: gameSize.y / 2}
         this.keyboarder = Keyboarder
     }
 
     update () { 
         if (this.keyboarder.isDown(this.keyboarder.KEYS.RIGHT)) {
-            this.center.x += 5
+            this.center.x += 2
         } else if (this.keyboarder.isDown(this.keyboarder.KEYS.LEFT)) {
-            this.center.x -= 5
+            this.center.x -= 2
         } else if (this.keyboarder.isDown(this.keyboarder.KEYS.UP)){
-            this.center.y -= 5
+            this.center.y -= 2
         } else if (this.keyboarder.isDown(this.keyboarder.KEYS.DOWN)){
-            this.center.y += 5
+            this.center.y += 2
         } 
     }
 
@@ -69,18 +87,34 @@ class Player {
         else if (this.center.y > 275) {this.center.y = 275}
     }
 
+    getCoin() {
+        if (this.player.center.x + this.player.size.x/2 > this.coin.center.x - this.coin.size.x) {console.log ("Hit, left side")}
+    }
+
 }
 
 class Coin {
-    constructor (gameSize) {
-        this.size = {x: 40, y: 50}
-        this.center = { x: gameSize.x / 2, y: gameSize.y / 2}
+    constructor () {
+        this.size = {x: 30, y: 30}
+        this.center = {x: 275, y: 175}
         let ranX = (Math.floor(Math.random() * 3))
+        console.log(ranX)
+            if (ranX === 0) {this.center.x = 175}
+            else if (ranX === 1) {this.center.x = 225}
+            else if (ranX === 2) {this.center.x = 275}
+            console.log (this.center.x)
         let ranY = (Math.floor(Math.random() * 3))
-        console.log (ranX)
-        console.log (ranY)
+            if (ranY === 0) {this.center.y = 175}
+            else if (ranY === 1) {this.center.y = 225}
+            else if (ranY === 2) {this.center.y = 275}
+
+
+
+
+
     }
-   
+
+
 
 }
 
