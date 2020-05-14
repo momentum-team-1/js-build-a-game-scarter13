@@ -51,6 +51,7 @@ class Game {
         screen.fillRect (enemyXPosition, enemyYPosition, enemyWidth, enemyHeight)
     }
     update () {
+        this.enemy.update()
         this.player.update()
         this.player.limit()
         if (this.player.center.x + this.player.size.x/2 < this.coin.center.x - this.coin.size.x/2 ||
@@ -114,16 +115,17 @@ class Coin {
             if (ranY === 0) {this.center.y = 175}
             else if (ranY === 1) {this.center.y = 225}
             else if (ranY === 2) {this.center.y = 275}
-
     }
-
-
 }
 
 class Enemy {
     constructor (){
     this.size = {x: 30, y: 30}
     this.center = {x: 175, y: 0}
+    }
+
+    update() {
+        this.center.y += 1
     }
 }
 
